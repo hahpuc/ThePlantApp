@@ -43,7 +43,12 @@ const Home = () => {
   // Render Planet Images
   function renderNewPlanets(item, index) {
     return (
-      <View>
+      <View
+        style={{
+          justifyContent: 'center',
+          alignContent: 'center',
+          marginHorizontal: SIZES.base,
+        }}>
         <Image
           source={item.img}
           resizeMode="cover"
