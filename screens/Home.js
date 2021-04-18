@@ -12,7 +12,6 @@ import {COLORS, FONTS, icons, images, SIZES} from '../constants';
 
 const Home = () => {
   // Dummy data
-
   const [newPlanetsData, setNewPlanets] = React.useState([
     {
       id: 0,
@@ -122,7 +121,7 @@ const Home = () => {
                   color: COLORS.white,
                   ...FONTS.h2,
                 }}>
-                NEW PLANETS
+                New Planets
               </Text>
 
               <TouchableOpacity
@@ -158,8 +157,94 @@ const Home = () => {
       <View
         style={{
           height: '50%',
-          backgroundColor: 'pink',
-        }}></View>
+        }}>
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: COLORS.white,
+            borderBottomLeftRadius: 50,
+            borderBottomRightRadius: 50,
+          }}>
+          <View
+            style={{
+              marginTop: SIZES.padding,
+              marginHorizontal: SIZES.padding,
+            }}>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}>
+              <Text
+                style={{
+                  color: COLORS.black,
+                  ...FONTS.body2,
+                }}>
+                Today's Share
+              </Text>
+              <Text
+                style={{
+                  color: COLORS.gray,
+                  ...FONTS.body3,
+                }}>
+                See All
+              </Text>
+            </View>
+
+            <View
+              style={{
+                flexDirection: 'row',
+                height: '88%',
+              }}>
+              <View
+                style={{
+                  flex: 1,
+                  // backgroundColor: 'red',
+                }}>
+                <TouchableOpacity style={{flex: 1}}>
+                  <Image
+                    source={images.plant5}
+                    resizeMode="cover"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      borderRadius: 20,
+                    }}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity style={{flex: 1, marginTop: 8}}>
+                  <Image
+                    source={images.plant6}
+                    resizeMode="cover"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      borderRadius: 20,
+                    }}
+                  />
+                </TouchableOpacity>
+              </View>
+              <View
+                style={{
+                  flex: 1.2,
+                }}>
+                <TouchableOpacity style={{flex: 1, marginLeft: 8}}>
+                  <Image
+                    source={images.plant7}
+                    resizeMode="cover"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      borderRadius: 20,
+                    }}
+                  />
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
 
       {/* Added Friends */}
       <View
