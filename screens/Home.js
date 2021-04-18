@@ -54,10 +54,39 @@ const Home = () => {
           resizeMode="cover"
           style={{
             width: SIZES.width * 0.23,
-            height: '82%',
+            height: '83%',
             borderRadius: 15,
           }}
         />
+
+        <View
+          style={{
+            position: 'absolute',
+            bottom: '16%',
+            right: 0,
+            backgroundColor: COLORS.primary,
+            borderTopLeftRadius: 10,
+            borderBottomLeftRadius: 10,
+          }}>
+          <Text style={{color: COLORS.white, ...FONTS.h3}}> {item.name} </Text>
+        </View>
+
+        <TouchableOpacity
+          style={{
+            position: 'absolute',
+            top: '16%',
+            left: 16,
+          }}
+          onPress={() => console.log('Press to Favorite')}>
+          <Image
+            source={item.favourite ? icons.heartRed : icons.heartGreenOutline}
+            resizeMode="contain"
+            style={{
+              width: 20,
+              height: 20,
+            }}
+          />
+        </TouchableOpacity>
       </View>
     );
   }
