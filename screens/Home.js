@@ -8,7 +8,7 @@ import {
   Image,
   FlatList,
 } from 'react-native';
-import {COLORS, FONTS, icons, images, SIZES} from '../constants';
+import { COLORS, FONTS, icons, images, SIZES } from '../constants';
 
 const Home = () => {
   // Dummy data
@@ -39,6 +39,29 @@ const Home = () => {
     },
   ]);
 
+  const [friendList, setFriendList] = React.useState([
+    {
+      id: 0,
+      img: images.profile1
+    },
+    {
+      id: 1,
+      img: images.profile2
+    },
+    {
+      id: 2,
+      img: images.profile3
+    },
+    {
+      id: 3,
+      img: images.profile4
+    },
+    {
+      id: 4,
+      img: images.profile5
+    },
+  ])
+
   // Render Planet Images
   function renderNewPlanets(item, index) {
     return (
@@ -67,7 +90,7 @@ const Home = () => {
             borderTopLeftRadius: 10,
             borderBottomLeftRadius: 10,
           }}>
-          <Text style={{color: COLORS.white, ...FONTS.h3}}> {item.name} </Text>
+          <Text style={{ color: COLORS.white, ...FONTS.h3 }}> {item.name} </Text>
         </View>
 
         <TouchableOpacity
@@ -88,6 +111,65 @@ const Home = () => {
         </TouchableOpacity>
       </View>
     );
+  }
+
+  // Function render FriendList 
+  function renderFriendList() {
+    if (friendList.length == 0) {
+      return (
+        <View></View>
+      )
+    } else if (friendList.length <= 3) {
+      return (
+        friendList.map((item, index) => (
+          <View
+            key={`friend-${index}`}
+            style={index == 0 ? { flexDirection: 'row' } : { flexDirection: 'row', marginLeft: -20 }}
+          >
+            <Image
+              source={item.img}
+              resizeMode="cover"
+              style={{
+                width: 50,
+                height: 50,
+                borderRadius: 25,
+                borderWidth: 3,
+                borderColor: COLORS.primary
+              }}
+            />
+          </View>
+        ))
+      )
+    } else {
+      return (
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          {friendList.map((item, index) => {
+            if (index <= 2) {
+              return (
+                <View
+                  key={`friend-${index}`}
+                  style={index == 0 ? {} : { marginLeft: -20 }}
+                >
+                  <Image
+                    source={item.img}
+                    resizeMode="cover"
+                    style={{
+                      width: 50,
+                      height: 50,
+                      borderRadius: 25,
+                      borderWidth: 3,
+                      borderColor: COLORS.primary
+                    }}
+                  />
+                </View>
+              )
+            }
+          })}
+
+          <Text style={{ marginLeft: 5, color: COLORS.secondary, ...FONTS.body3 }}>+{friendList.length - 3} More</Text>
+        </View>
+      )
+    }
   }
 
   return (
@@ -140,13 +222,13 @@ const Home = () => {
               </TouchableOpacity>
             </View>
 
-            <View style={{marginTop: SIZES.base}}>
+            <View style={{ marginTop: SIZES.base }}>
               <FlatList
                 horizontal
                 showsHorizontalScrollIndicator={false}
                 data={newPlanetsData}
                 keyExtractor={item => item.id.toString()}
-                renderItem={({item, index}) => renderNewPlanets(item, index)}
+                renderItem={({ item, index }) => renderNewPlanets(item, index)}
               />
             </View>
           </View>
@@ -167,7 +249,7 @@ const Home = () => {
           }}>
           <View
             style={{
-              marginTop: SIZES.padding,
+              marginTop: SIZES.padding / 2,
               marginHorizontal: SIZES.padding,
             }}>
             <View
@@ -195,6 +277,7 @@ const Home = () => {
             <View
               style={{
                 flexDirection: 'row',
+                marginTop: 8,
                 height: '88%',
               }}>
               <View
@@ -202,7 +285,7 @@ const Home = () => {
                   flex: 1,
                   // backgroundColor: 'red',
                 }}>
-                <TouchableOpacity style={{flex: 1}}>
+                <TouchableOpacity style={{ flex: 1 }}>
                   <Image
                     source={images.plant5}
                     resizeMode="cover"
@@ -213,7 +296,7 @@ const Home = () => {
                     }}
                   />
                 </TouchableOpacity>
-                <TouchableOpacity style={{flex: 1, marginTop: 8}}>
+                <TouchableOpacity style={{ flex: 1, marginTop: 8 }}>
                   <Image
                     source={images.plant6}
                     resizeMode="cover"
@@ -229,7 +312,7 @@ const Home = () => {
                 style={{
                   flex: 1.2,
                 }}>
-                <TouchableOpacity style={{flex: 1, marginLeft: 8}}>
+                <TouchableOpacity style={{ flex: 1, marginLeft: 8 }}>
                   <Image
                     source={images.plant7}
                     resizeMode="cover"
@@ -247,11 +330,44 @@ const Home = () => {
       </View>
 
       {/* Added Friends */}
-      <View
-        style={{
-          height: '20%',
-          backgroundColor: COLORS.lightGray,
-        }}></View>
+      <View style={{ height: '20%', backgroundColor: COLORS.lightGray }}>
+        <View style={{ flex: 1 }}>
+          <View style={{ marginTop: SIZES.radius, marginHorizontal: SIZES.padding }}>
+            <Text style={{ color: COLORS.black, ...FONTS.h2 }}> Add Friends </Text>
+            <Text style={{ color: COLORS.secondary, ...FONTS.body3 }}> {friendList.length} total </Text>
+          </View>
+        </View>
+
+        <View style={{ flex: 1.3, flexDirection: 'row' }}>
+          {/* Friend List*/}
+          <View style={{ flex: 1.3, marginHorizontal: SIZES.padding, justifyContent: 'center' }}>
+            {renderFriendList()}
+          </View>
+          {/* Add Friend */}
+          <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+            <Text> Add New</Text>
+            <TouchableOpacity
+              style={{
+                marginLeft: SIZES.base,
+                marginHorizontal: SIZES.padding / 2,
+                width: 40,
+                height: 40,
+                borderRadius: 10,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: COLORS.gray
+              }}
+            >
+              <Image source={icons.plus} resizeMode="contain"
+                style={{
+                  width: 20,
+                  height: 20,
+                }}
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
     </View>
   );
 };
